@@ -11,5 +11,14 @@ class GFG {
 		} else {
 			System.out.println("Both Objects are not equal.... ");
 		}
+		
+//		String name1 = "Shahabuddin";
+//		String name2 = "Shahabuddin";
+//		String name3 = new String("Shahabuddin");
+//		String name4 = new String("Shahabuddin");
+//		System.out.println(name1.hashCode());
+//		System.out.println(name2.hashCode());
+//		System.out.println(name3.hashCode());
+//		System.out.println(name4.hashCode());
 	}
 }

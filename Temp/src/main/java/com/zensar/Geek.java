@@ -19,7 +19,6 @@ class Geek {
 	}
 	@Override
 	public int hashCode() {
-		System.out.println(this.id);
 		return this.id;
 	}
 }

@@ -1,13 +1,9 @@
 package com.zensar;
-
 import java.util.*;
 import java.util.stream.Collectors.*;
 import java.util.stream.*;
-
 public class Temp {
 	static int i = 2;
-	  
-    // Method to print numbers
     public static void printNumber(int x)
     {
         printNumber(i);
@@ -29,6 +25,9 @@ public class Temp {
 		Optional<String> str = list.stream().max((a,b)->a.length()-b.length());
 		System.out.println(str.get());
 		System.out.println(Arrays.asList("AAA","ssss","wwwnnnnnnw","wwwwaaaaa").stream().min((a,b)->a.length()-b.length()).get());
+		List<String> decending = list.stream().sorted(Collections.reverseOrder()).collect(Collectors.toList());
+		List<String> asending = list.stream().sorted().collect(Collectors.toList());
+		System.out.println(decending);
+		System.out.println(asending);
 	}
-
 }

@@ -13,13 +13,13 @@ public class Testing {
 			m = marks;
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 		//Thread.sleep(-1); //java.lang.IllegalArgumentException: timeout value is negative
 		Testing s1 = new Testing();
 		s1.setMarks(45);
 		System.out.println(s1.m);
 		Testing s2 = new Testing();
-		s2.setMarks(101);
+		s2.setMarks(10);
 		System.out.println(s2.m);
 		String u="j";
 		int a=10,b=20;

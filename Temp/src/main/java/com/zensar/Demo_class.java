@@ -38,7 +38,7 @@ public class Demo_class {
 		
 		System.out.println(map);
 		Optional<Entry<String, Integer>> entry = map.entrySet().stream().max((a,b)->a.getValue()-b.getValue());
-		System.out.println(entry.get().getKey()+" : "+ entry.get().getValue());
+		System.out.println("max : "+entry.get().getKey()+" : "+ entry.get().getValue());
 		Map<String, Integer> sorting = map.entrySet().stream().sorted(Map.Entry.<String,Integer>comparingByKey().reversed())
 				.collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(a,b)->a, LinkedHashMap::new));
 		System.out.println(sorting);
