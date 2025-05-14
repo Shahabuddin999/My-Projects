@@ -10,12 +10,19 @@ public class RetryServiceImpl implements RetryService{
      
     Logger logger = LoggerFactory.getLogger(RetryServiceImpl.class);
      
-    int counter = 0;
+    int counter = 1;
  
     @Override
-    public void retry(Map<String, String> request) throws Exception {
+    public String retry(Map<String, Integer> request) {
          
         logger.info("Executing retry service : "+ counter++);
-        int a = 10/0;
+        System.out.println(request.get("numerator")/request.get("denominator"));
+		return "Success";
     }
+
+	@Override
+	public String getRetryFallback(Exception e, Map<String, Integer> request) {
+		logger.info("Retry failed last attempt: "+ --counter+" : Exception : "+ e.getMessage());
+		return "Hello from fallback method!!!";
+	}
 }

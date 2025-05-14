@@ -35,7 +35,7 @@ public class Comparing {
 		List<Emp> filter = list.stream().filter(val->val.age>8).collect(Collectors.toList());
 		System.out.println(filter);
 		List<Integer> listData = Arrays.asList(10,21,51,8,4);
-		System.out.println(listData.stream().min((a,b)->a-b).get());
+		System.out.println(listData.stream().min((a,b)->a>b?1:-1).get());
 		int v = listData.stream().filter(num->num%2==0).reduce(0,(a,b)->a+b);
 		System.out.println(v);
 	}

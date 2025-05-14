@@ -14,7 +14,7 @@ public class RestController {
     private RetryService retryService;
      
     @PostMapping(value="/post")
-    public void post(@RequestBody Map<String,String> request) throws Exception{
+    public void post(@RequestBody Map<String,Integer> request) throws Exception{
          
         retryService.retry(request);
     }
