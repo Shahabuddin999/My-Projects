@@ -17,7 +17,7 @@ public class InvalidTicketIdException extends RuntimeException {
 
 	@Override
 	public String toString() {
-		return "Ticket Id is not found " + this.message;
+		return "The Ticket Id you have given that is not found " + this.message;
 	}
 
 }
