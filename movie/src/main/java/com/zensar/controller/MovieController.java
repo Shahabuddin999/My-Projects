@@ -22,7 +22,7 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/theater/movie")
-public class MovieController { 
+public class MovieController {
 
 	@Autowired
 	private MovieServiceImpl service;
