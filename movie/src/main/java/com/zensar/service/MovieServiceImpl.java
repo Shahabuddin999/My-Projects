@@ -33,7 +33,7 @@ public class MovieServiceImpl implements MovieService {
 		BeanUtils.copyProperties(dto, movie);
 		Optional<MovieEntity> check = movieRepo.findByTitle(dto.getTitle());
 		if(check.isPresent()) {
-			throw new IllegalArgumentException(dto.getTitle()+ ", movie is already present");
+			throw new IllegalArgumentException(dto.getTitle()+ ", movie is already present...");
 		}
 		MovieEntity savedMovie = movieRepo.save(movie);
 		Movie movieDTO = new Movie();
