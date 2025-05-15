@@ -3,6 +3,7 @@ import java.time.Duration;
 
 import org.springframework.stereotype.Service;
 
+import com.webflux.demo.dto.Customer;
 import com.webflux.demo.entity.User;
 import com.webflux.demo.repository.UserRepository;
 
@@ -11,11 +12,12 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class UserService {
-    private final UserRepository userRepository;
+	
+	private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+	public UserService(UserRepository userRepository) {
+	        this.userRepository = userRepository;
+	    }
 
     public Flux<User> getAllUsers() {
         return userRepository.findAll();
@@ -42,12 +44,12 @@ public class UserService {
         return userRepository.deleteById(id);
     }
     
-    public Flux<User> getAllUsersUsingFlux() {
+    public Flux<Customer> getAllCustomerUsingFlux() {
     	
-    	Flux<User> flux = Flux.range(1, 10)  
+    	Flux<Customer> flux = Flux.range(1, 10)  
 		    			 .delayElements (Duration.ofSeconds(1))  
 		    			 .doOnNext(i -> System.out.println("processing count:" + i))  
-		    			 .map(i -> new User(i, "user "+i, "user "+i+"@gmail.com"));
+		    			 .map(i -> new Customer(i, "user "+i, "user "+i+"@gmail.com"));
     	return flux;
     }
 }
