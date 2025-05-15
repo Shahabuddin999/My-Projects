@@ -29,7 +29,7 @@ public class EmailService {
     public void sendEmailRepeatAgain() {
         try {
             Thread.sleep(3000);
-            System.out.println("sendEmailAgain : "+Thread.currentThread().getName());
+            System.out.println("sendEmailRepeatAgain : "+Thread.currentThread().getName());
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
