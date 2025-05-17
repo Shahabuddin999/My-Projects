@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.webflux.demo.dto.Customer;
+import com.webflux.demo.entity.Order;
 import com.webflux.demo.entity.User;
+import com.webflux.demo.entity.UserWithOrders;
 import com.webflux.demo.service.UserService;
 
 import reactor.core.publisher.Flux;
@@ -24,7 +26,7 @@ public class UserController {
 	public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping
+    @GetMapping(produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<User> getAllUsers() {
         return userService.getAllUsers();
     }
@@ -53,5 +55,20 @@ public class UserController {
     @GetMapping(value="/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE) 
     public Flux<Customer> getAllCustomerUsingFlux() {
         return userService.getAllCustomerUsingFlux();
+    }
+    
+    @GetMapping(value = "/order/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public  Mono<UserWithOrders> getUserWithOrders(@PathVariable("id")Integer id) {
+        return userService.getUserWithOrders(id);
+    }
+    
+    @PostMapping(value="/order")
+    public Mono<Order> createOrder(@RequestBody Order user) {
+        return userService.createOrder(user);
+    }
+    
+    @GetMapping(value="/alluserwithorder")
+    public Flux<UserWithOrders> getAllUsersWithOrders(){
+    	return userService.getAllUsersWithOrders();
     }
 }
