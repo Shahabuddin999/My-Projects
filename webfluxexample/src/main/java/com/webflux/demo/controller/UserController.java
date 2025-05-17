@@ -51,7 +51,7 @@ public class UserController {
         return userService.deleteUser(id);
     }
     
-    // "produces = MediaType.TEXT_EVENT_STREAM_VALUE" is important to work with Flux else will not work
+    // "produces = MediaType.TEXT_EVENT_STREAM_VALUE" is important to work with Flux as it get record and will return else will not work
     @GetMapping(value="/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE) 
     public Flux<Customer> getAllCustomerUsingFlux() {
         return userService.getAllCustomerUsingFlux();
@@ -67,7 +67,7 @@ public class UserController {
         return userService.createOrder(user);
     }
     
-    @GetMapping(value="/alluserwithorder")
+    @GetMapping(value="/alluserwithorder", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<UserWithOrders> getAllUsersWithOrders(){
     	return userService.getAllUsersWithOrders();
     }

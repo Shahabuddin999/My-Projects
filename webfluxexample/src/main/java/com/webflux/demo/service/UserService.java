@@ -81,15 +81,31 @@ public class UserService {
 	}
 
 	public Flux<UserWithOrders> getAllUsersWithOrders() {
-	    return userRepository.findAll()
-	        .flatMap(user -> orderRepository.findByUserId(user.getId())
-	            .collectList()
-	            .map(orders -> {
-	                UserWithOrders userWithOrders = new UserWithOrders();
-	                userWithOrders.setUser(user);
-	                userWithOrders.setOrders(orders);
-	                return userWithOrders;  // Return the combined object here
-	            })
-	        );
+//	    return userRepository.findAll()
+//	        .flatMap(user -> orderRepository.findByUserId(user.getId())
+//	            .collectList()
+//	            .map(orders -> {
+//	                UserWithOrders userWithOrders = new UserWithOrders();
+//	                userWithOrders.setUser(user);
+//	                userWithOrders.setOrders(orders);
+//	                return userWithOrders;  // Return the combined object here
+//	            })
+//	        );
+	// Above code is also  non-blocking but if you want to see as records is loaded it should return then I used delayElements(Duration.ofSeconds(1))	
+		
+		return userRepository.findAll()
+		        .flatMap(user -> orderRepository.findByUserId(user.getId())
+		            .collectList()
+		            .map(orders -> {
+		                UserWithOrders userWithOrders = new UserWithOrders();
+		                userWithOrders.setUser(user);
+		                userWithOrders.setOrders(orders);
+		                return userWithOrders;
+		            })
+		        )
+		        .delayElements(Duration.ofSeconds(1)) // Non-blocking delay between each emission
+		        .doOnNext(userWithOrders -> {
+		            System.out.println("Emitting user with orders: " + userWithOrders);
+		        });
 	}
 }
