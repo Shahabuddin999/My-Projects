@@ -36,11 +36,17 @@ public class EmailController {
 		emailService.sendEmail();
 		emailService.sendEmailAgain();
 		emailService.sendEmailRepeatAgain();
+		//String []value =new String[1];
 		CompletableFuture<String> info = emailService.initiate();
-		System.out.println(info.get());
+		info.thenAccept(val->{
+			System.out.println("recieved data : "+val);
+			
+		});
+		//value[0] = info.get();
 		emailService.process();
 		emailService.info();
 		emailService.payment();
+		//System.out.println("recieved data again : "+value[0]);
 
 		return "Execution finished";
 	}

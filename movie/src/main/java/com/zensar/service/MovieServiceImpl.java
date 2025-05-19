@@ -18,7 +18,7 @@ import com.zensar.repository.MovieRepo;
 import com.zensar.repository.TicketRepo;
 
 @Service
-public class MovieServiceImpl implements MovieService {
+public class MovieServiceImpl implements MovieService,TicketService {
 	@Autowired
 	private MovieRepo movieRepo;
 	@Autowired
@@ -43,13 +43,14 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	public Movie getMovieById(int id) {
-		MovieEntity entity = movieRepo.findById((long) id)
+		MovieEntity entity = movieRepo.findById(id)
 				.orElseThrow(() -> new InvalidMovieIdException("Invalid movie ID"));
 		Movie movieDTO = new Movie();
 		BeanUtils.copyProperties(entity, movieDTO);
 		return movieDTO;
 	}
 
+	@Override
 	public Ticket bookTicket(Ticket dto) {
 		if (dto.getTitle() == null || dto.getType() == null)
 			throw new IllegalArgumentException("Missing ticket data");
@@ -69,7 +70,7 @@ public class MovieServiceImpl implements MovieService {
 		BeanUtils.copyProperties(savedTicket, ticketDto);
 		return ticketDto;
 	}
-
+	@Override
 	public Ticket getTicket(int id) {
 		TicketEntity ticketEntity = ticketRepo.findById(id)
 				.orElseThrow(() -> new InvalidTicketIdException("Invalid ticket ID :" + id));
@@ -81,7 +82,7 @@ public class MovieServiceImpl implements MovieService {
 
 	@Override
 	public List<Ticket> getTicketsByMovieId(int id) {
-		MovieEntity entity = movieRepo.findById((long) id)
+		MovieEntity entity = movieRepo.findById(id)
 				.orElseThrow(() -> new InvalidMovieIdException("Invalid movie ID : " + id));
 		List<TicketEntity> list = entity.getTickets();
 		List<Ticket> tickets = new ArrayList<>();

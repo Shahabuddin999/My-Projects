@@ -78,6 +78,6 @@ public class EmailService {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return CompletableFuture.completedFuture("Done");
+        return CompletableFuture.completedFuture("initiate Done");
     }
 }
